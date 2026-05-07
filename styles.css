@@ -266,7 +266,7 @@ textarea {
 .about-photo {
   width: 168px;
   height: 168px;
-  border-radius: 8px;
+  border-radius: 50%;
   display: block;
   object-fit: cover;
   object-position: center center;
