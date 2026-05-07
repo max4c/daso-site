@@ -258,6 +258,20 @@ textarea {
   background: #fffefd;
 }
 
+.about-layout {
+  display: grid;
+  gap: 28px;
+}
+
+.about-photo {
+  width: 168px;
+  height: 168px;
+  border-radius: 8px;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+}
+
 .footer {
   padding: 30px 0 34px;
   border-top: 1px solid var(--line);
@@ -293,6 +307,17 @@ textarea {
   .details-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 34px 48px;
+  }
+
+  .about-layout {
+    grid-template-columns: 178px minmax(0, 1fr);
+    align-items: start;
+    gap: 40px;
+  }
+
+  .about-photo {
+    width: 178px;
+    height: 178px;
   }
 }
 
