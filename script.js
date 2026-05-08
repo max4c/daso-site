@@ -14,8 +14,17 @@ if (subscribeForm) {
       return;
     }
 
-    const endpoint = subscribeForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+    const resendEndpoint = subscribeForm.dataset.subscribeAction;
+    const fallbackEndpoint = subscribeForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
     const formData = new FormData(subscribeForm);
+    const postForm = (endpoint) =>
+      fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
 
     submitButton.disabled = true;
     submitButton.textContent = "Sending...";
@@ -23,13 +32,19 @@ if (subscribeForm) {
     statusMessage.removeAttribute("data-state");
 
     try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      let response;
+
+      if (resendEndpoint) {
+        response = await postForm(resendEndpoint);
+      }
+
+      if (!response?.ok && response?.status === 503) {
+        response = await postForm(fallbackEndpoint);
+      }
+
+      if (!response) {
+        response = await postForm(fallbackEndpoint);
+      }
 
       if (!response.ok) {
         throw new Error("Subscription failed");
@@ -39,8 +54,20 @@ if (subscribeForm) {
       statusMessage.textContent = "Thanks. We will keep you posted.";
       statusMessage.dataset.state = "success";
     } catch {
-      statusMessage.textContent = "Something went wrong. Email max@getdaso.com and we will add you.";
-      statusMessage.dataset.state = "error";
+      try {
+        const response = await postForm(fallbackEndpoint);
+
+        if (!response.ok) {
+          throw new Error("Fallback subscription failed");
+        }
+
+        subscribeForm.reset();
+        statusMessage.textContent = "Thanks. We will keep you posted.";
+        statusMessage.dataset.state = "success";
+      } catch {
+        statusMessage.textContent = "Something went wrong. Email max@getdaso.com and we will add you.";
+        statusMessage.dataset.state = "error";
+      }
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = initialButtonText;
