@@ -9,7 +9,7 @@
       content="Daso is a new kind of computer for kids, being built with parents from the beginning."
     >
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23E7762C'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="styles.css?v=20260508-parent-demo">
+    <link rel="stylesheet" href="styles.css?v=20260508-demo-arrow">
   </head>
   <body>
     <main>
@@ -66,53 +66,58 @@
               show the kind of calm, kid-first interactions we are exploring.
             </p>
           </div>
-          <div class="demo-carousel" aria-label="Daso demo videos">
-            <figure class="demo-item">
-              <video
-                autoplay
-                muted
-                playsinline
-                preload="metadata"
-                poster="assets/demos/home-screen-poster.jpg"
-                aria-label="Home screen demo"
-              >
-                <source src="assets/demos/home-screen.mp4" type="video/mp4">
-              </video>
-              <figcaption>
-                <strong>A calm place to begin.</strong>
-                <span>Pick up where you left off, or choose something new.</span>
-              </figcaption>
-            </figure>
-            <figure class="demo-item">
-              <video
-                muted
-                playsinline
-                preload="metadata"
-                poster="assets/demos/reading-level-poster.jpg"
-                aria-label="Reading level demo"
-              >
-                <source src="assets/demos/reading-level.mp4" type="video/mp4">
-              </video>
-              <figcaption>
-                <strong>Reading that can meet a kid where they are.</strong>
-                <span>Help with unfamiliar words without pulling them away from the story.</span>
-              </figcaption>
-            </figure>
-            <figure class="demo-item">
-              <video
-                muted
-                playsinline
-                preload="metadata"
-                poster="assets/demos/parent-update-poster.jpg"
-                aria-label="Parent update demo"
-              >
-                <source src="assets/demos/parent-update.mp4" type="video/mp4">
-              </video>
-              <figcaption>
-                <strong>A simple window into what they made.</strong>
-                <span>Help parents stay connected without turning the kid's computer into another feed.</span>
-              </figcaption>
-            </figure>
+          <div class="demo-carousel-shell">
+            <div id="demo-carousel-track" class="demo-carousel" aria-label="Daso demo videos">
+              <figure class="demo-item">
+                <video
+                  autoplay
+                  muted
+                  playsinline
+                  preload="metadata"
+                  poster="assets/demos/home-screen-poster.jpg"
+                  aria-label="Home screen demo"
+                >
+                  <source src="assets/demos/home-screen.mp4" type="video/mp4">
+                </video>
+                <figcaption>
+                  <strong>A calm place to begin.</strong>
+                  <span>Pick up where you left off, or choose something new.</span>
+                </figcaption>
+              </figure>
+              <figure class="demo-item">
+                <video
+                  muted
+                  playsinline
+                  preload="metadata"
+                  poster="assets/demos/reading-level-poster.jpg"
+                  aria-label="Reading level demo"
+                >
+                  <source src="assets/demos/reading-level.mp4" type="video/mp4">
+                </video>
+                <figcaption>
+                  <strong>Reading that can meet a kid where they are.</strong>
+                  <span>Help with unfamiliar words without pulling them away from the story.</span>
+                </figcaption>
+              </figure>
+              <figure class="demo-item">
+                <video
+                  muted
+                  playsinline
+                  preload="metadata"
+                  poster="assets/demos/parent-update-poster.jpg"
+                  aria-label="Parent update demo"
+                >
+                  <source src="assets/demos/parent-update.mp4" type="video/mp4">
+                </video>
+                <figcaption>
+                  <strong>A simple window into what they made.</strong>
+                  <span>Help parents stay connected without turning the kid's computer into another feed.</span>
+                </figcaption>
+              </figure>
+            </div>
+            <button class="demo-arrow" type="button" aria-label="Show next demo" aria-controls="demo-carousel-track">
+              <span aria-hidden="true">&rarr;</span>
+            </button>
           </div>
         </div>
       </section>
@@ -198,6 +203,6 @@
         <p>Daso &middot; 2026</p>
       </div>
     </footer>
-    <script src="script.js?v=20260508-parent-demo"></script>
+    <script src="script.js?v=20260508-demo-arrow"></script>
   </body>
 </html>
