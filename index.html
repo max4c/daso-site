@@ -9,7 +9,7 @@
       content="Daso is a new kind of computer for kids, being built with parents from the beginning."
     >
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23E7762C'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="styles.css?v=20260508-on-view">
+    <link rel="stylesheet" href="styles.css?v=20260508-demo-viewer">
   </head>
   <body>
     <main>
@@ -69,45 +69,60 @@
           <div class="demo-carousel-shell">
             <div id="demo-carousel-track" class="demo-carousel" aria-label="Daso demo videos">
               <figure class="demo-item">
-                <video
-                  muted
-                  playsinline
-                  preload="metadata"
-                  poster="assets/demos/home-screen-poster.jpg"
-                  aria-label="Home screen demo"
-                >
-                  <source src="assets/demos/home-screen.mp4" type="video/mp4">
-                </video>
+                <div class="demo-media">
+                  <video
+                    muted
+                    playsinline
+                    preload="metadata"
+                    poster="assets/demos/home-screen-poster.jpg"
+                    aria-label="Home screen demo"
+                  >
+                    <source src="assets/demos/home-screen.mp4" type="video/mp4">
+                  </video>
+                  <button class="demo-open" type="button" aria-label="Open home screen demo">
+                    <span aria-hidden="true">&#8599;</span>
+                  </button>
+                </div>
                 <figcaption>
                   <strong>A calm place to begin.</strong>
                   <span>Pick up where you left off, or choose something new.</span>
                 </figcaption>
               </figure>
               <figure class="demo-item">
-                <video
-                  muted
-                  playsinline
-                  preload="metadata"
-                  poster="assets/demos/reading-level-poster.jpg"
-                  aria-label="Reading level demo"
-                >
-                  <source src="assets/demos/reading-level.mp4" type="video/mp4">
-                </video>
+                <div class="demo-media">
+                  <video
+                    muted
+                    playsinline
+                    preload="metadata"
+                    poster="assets/demos/reading-level-poster.jpg"
+                    aria-label="Reading level demo"
+                  >
+                    <source src="assets/demos/reading-level.mp4" type="video/mp4">
+                  </video>
+                  <button class="demo-open" type="button" aria-label="Open reading level demo">
+                    <span aria-hidden="true">&#8599;</span>
+                  </button>
+                </div>
                 <figcaption>
                   <strong>Reading that can meet a kid where they are.</strong>
                   <span>Help with unfamiliar words without pulling them away from the story.</span>
                 </figcaption>
               </figure>
               <figure class="demo-item">
-                <video
-                  muted
-                  playsinline
-                  preload="metadata"
-                  poster="assets/demos/parent-update-poster.jpg"
-                  aria-label="Parent update demo"
-                >
-                  <source src="assets/demos/parent-update.mp4" type="video/mp4">
-                </video>
+                <div class="demo-media">
+                  <video
+                    muted
+                    playsinline
+                    preload="metadata"
+                    poster="assets/demos/parent-update-poster.jpg"
+                    aria-label="Parent update demo"
+                  >
+                    <source src="assets/demos/parent-update.mp4" type="video/mp4">
+                  </video>
+                  <button class="demo-open" type="button" aria-label="Open parent update demo">
+                    <span aria-hidden="true">&#8599;</span>
+                  </button>
+                </div>
                 <figcaption>
                   <strong>A simple window into what they made.</strong>
                   <span>Help parents stay connected without turning the kid's computer into another feed.</span>
@@ -117,6 +132,11 @@
             <button class="demo-arrow" type="button" aria-label="Show next demo" aria-controls="demo-carousel-track">
               <span aria-hidden="true">&rarr;</span>
             </button>
+            <div class="demo-dots" aria-label="Choose demo">
+              <button class="demo-dot" type="button" aria-label="Show demo 1"></button>
+              <button class="demo-dot" type="button" aria-label="Show demo 2"></button>
+              <button class="demo-dot" type="button" aria-label="Show demo 3"></button>
+            </div>
           </div>
         </div>
       </section>
@@ -196,12 +216,21 @@
       </section>
     </main>
 
+    <dialog class="demo-viewer" aria-label="Expanded demo video">
+      <div class="demo-viewer-inner">
+        <button class="demo-viewer-close" type="button" aria-label="Close expanded demo">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <video class="demo-viewer-video" controls muted playsinline preload="metadata"></video>
+      </div>
+    </dialog>
+
     <footer class="footer">
       <div class="page">
         <a href="mailto:max@getdaso.com">max@getdaso.com</a>
         <p>Daso &middot; 2026</p>
       </div>
     </footer>
-    <script src="script.js?v=20260508-on-view"></script>
+    <script src="script.js?v=20260508-demo-viewer"></script>
   </body>
 </html>

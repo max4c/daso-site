@@ -3,12 +3,32 @@ const carousel = document.querySelector(".demo-carousel");
 if (carousel) {
   const demoSection = carousel.closest(".demos");
   const nextButton = document.querySelector(".demo-arrow");
+  const dotButtons = Array.from(document.querySelectorAll(".demo-dot"));
+  const openButtons = Array.from(carousel.querySelectorAll(".demo-open"));
+  const viewer = document.querySelector(".demo-viewer");
+  const viewerVideo = viewer?.querySelector(".demo-viewer-video");
+  const closeViewerButton = viewer?.querySelector(".demo-viewer-close");
   const videos = Array.from(carousel.querySelectorAll("video"));
   let activeIndex = 0;
   let hasAutoStarted = false;
+  let isViewerOpen = false;
   let scrollTimer;
 
+  const setActiveDot = (index) => {
+    dotButtons.forEach((button, buttonIndex) => {
+      if (buttonIndex === index) {
+        button.setAttribute("aria-current", "true");
+      } else {
+        button.removeAttribute("aria-current");
+      }
+    });
+  };
+
   const playVideo = (index) => {
+    if (isViewerOpen) {
+      return;
+    }
+
     videos.forEach((video, videoIndex) => {
       if (videoIndex === index) {
         video.currentTime = 0;
@@ -27,6 +47,7 @@ if (carousel) {
 
   const activateVideo = (index, shouldPlay = hasAutoStarted) => {
     activeIndex = index % videos.length;
+    setActiveDot(activeIndex);
     const activeItem = videos[activeIndex].closest(".demo-item");
     activeItem?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
     if (shouldPlay) {
@@ -47,6 +68,7 @@ if (carousel) {
     const closestIndex = getClosestIndex();
     if (closestIndex !== activeIndex) {
       activeIndex = closestIndex;
+      setActiveDot(activeIndex);
       if (hasAutoStarted) {
         playVideo(activeIndex);
       }
@@ -63,6 +85,76 @@ if (carousel) {
     activateVideo(getClosestIndex() + 1, true);
   });
 
+  dotButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      hasAutoStarted = true;
+      activateVideo(index, true);
+    });
+  });
+
+  const closeViewer = () => {
+    if (viewer?.open && typeof viewer.close === "function") {
+      viewer.close();
+      return;
+    }
+
+    viewer?.removeAttribute("open");
+  };
+
+  const openViewer = (index) => {
+    const source = videos[index].querySelector("source")?.src;
+    if (!viewer || !viewerVideo || !source) {
+      return;
+    }
+
+    hasAutoStarted = true;
+    activeIndex = index;
+    setActiveDot(activeIndex);
+    pauseVideos();
+    isViewerOpen = true;
+
+    viewerVideo.poster = videos[index].poster;
+    viewerVideo.src = source;
+
+    if (typeof viewer.showModal === "function") {
+      viewer.showModal();
+    } else {
+      viewer.setAttribute("open", "");
+    }
+
+    viewerVideo.play().catch(() => {});
+  };
+
+  videos.forEach((video, index) => {
+    video.addEventListener("click", () => {
+      openViewer(index);
+    });
+  });
+
+  openButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      openViewer(index);
+    });
+  });
+
+  closeViewerButton?.addEventListener("click", closeViewer);
+
+  viewer?.addEventListener("click", (event) => {
+    if (event.target === viewer) {
+      closeViewer();
+    }
+  });
+
+  viewer?.addEventListener("close", () => {
+    viewerVideo?.pause();
+    viewerVideo?.removeAttribute("src");
+    viewerVideo?.load();
+    isViewerOpen = false;
+    if (hasAutoStarted) {
+      playVideo(activeIndex);
+    }
+  });
+
   const startFirstDemo = () => {
     if (hasAutoStarted) {
       return;
@@ -70,6 +162,7 @@ if (carousel) {
 
     hasAutoStarted = true;
     activeIndex = 0;
+    setActiveDot(activeIndex);
     carousel.scrollTo({ left: 0, behavior: "auto" });
     playVideo(0);
   };
@@ -87,4 +180,6 @@ if (carousel) {
 
     observer.observe(demoSection);
   }
+
+  setActiveDot(activeIndex);
 }
