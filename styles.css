@@ -184,23 +184,36 @@ textarea:focus-visible {
   line-height: 1.52;
 }
 
-.demo-grid {
-  display: grid;
-  gap: 34px;
-  margin-top: 44px;
+.demo-carousel {
+  display: flex;
+  gap: 18px;
+  margin-top: 36px;
+  overflow-x: auto;
+  padding: 2px 0 18px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.demo-carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .demo-item {
+  flex: 0 0 100%;
   margin: 0;
+  scroll-snap-align: start;
 }
 
 .demo-item video {
   width: 100%;
+  aspect-ratio: 16 / 9;
   display: block;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #f2eee8;
   box-shadow: var(--shadow);
+  object-fit: cover;
 }
 
 .demo-item figcaption {
@@ -304,9 +317,13 @@ textarea:focus-visible {
     gap: 34px 48px;
   }
 
-  .demo-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 38px;
+  .demo-carousel {
+    gap: 22px;
+    max-width: 940px;
+  }
+
+  .demo-item {
+    flex-basis: min(42vw, 440px);
   }
 
   .about-layout {
