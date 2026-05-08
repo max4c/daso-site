@@ -195,63 +195,11 @@ textarea:focus-visible {
   margin-top: 34px;
 }
 
-.signup-form {
-  display: grid;
-  gap: 22px;
-  margin-top: 34px;
-  padding: clamp(24px, 5vw, 42px);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #ffffff;
-  box-shadow: var(--shadow);
-}
-
-.field {
-  display: grid;
-  gap: 8px;
-}
-
-label {
-  font-size: 15px;
-  font-weight: 760;
-}
-
-label span {
-  color: var(--muted);
-  font-weight: 500;
-}
-
-input,
-textarea {
+.booking-button {
   width: 100%;
-  min-height: 52px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--field);
-  color: var(--ink);
-  font: inherit;
-}
-
-input {
-  padding: 0 14px;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 126px;
-  padding: 12px 14px;
-}
-
-.form-button {
-  width: 100%;
-  margin-top: 6px;
-}
-
-.form-note {
-  min-height: 1.3em;
-  margin: 0;
-  color: var(--muted);
-  font-size: 15px;
+  min-height: 68px;
+  margin-top: 8px;
+  font-size: clamp(20px, 3vw, 25px);
 }
 
 .about {
