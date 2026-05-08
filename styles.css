@@ -169,6 +169,53 @@ textarea:focus-visible {
   background: #fffefd;
 }
 
+.demos {
+  background: #fffefd;
+}
+
+.demos-intro {
+  max-width: 720px;
+}
+
+.demos-intro p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: clamp(19px, 2.4vw, 23px);
+  line-height: 1.52;
+}
+
+.demo-grid {
+  display: grid;
+  gap: 34px;
+  margin-top: 44px;
+}
+
+.demo-item {
+  margin: 0;
+}
+
+.demo-item video {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f2eee8;
+  box-shadow: var(--shadow);
+}
+
+.demo-item figcaption {
+  display: grid;
+  gap: 4px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.demo-item strong {
+  color: var(--ink);
+}
+
 .details-grid {
   display: grid;
   gap: 28px;
@@ -255,6 +302,11 @@ textarea:focus-visible {
   .details-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 34px 48px;
+  }
+
+  .demo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 38px;
   }
 
   .about-layout {
