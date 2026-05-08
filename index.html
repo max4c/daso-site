@@ -9,7 +9,7 @@
       content="Daso is a new kind of computer for kids, being built with parents from the beginning."
     >
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23E7762C'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="styles.css?v=20260508-demo-viewer">
+    <link rel="stylesheet" href="styles.css?v=20260508-click-video">
   </head>
   <body>
     <main>
@@ -69,7 +69,7 @@
           <div class="demo-carousel-shell">
             <div id="demo-carousel-track" class="demo-carousel" aria-label="Daso demo videos">
               <figure class="demo-item">
-                <div class="demo-media">
+                <div class="demo-media" role="button" tabindex="0" aria-label="Open home screen demo">
                   <video
                     muted
                     playsinline
@@ -79,9 +79,6 @@
                   >
                     <source src="assets/demos/home-screen.mp4" type="video/mp4">
                   </video>
-                  <button class="demo-open" type="button" aria-label="Open home screen demo">
-                    <span aria-hidden="true">&#8599;</span>
-                  </button>
                 </div>
                 <figcaption>
                   <strong>A calm place to begin.</strong>
@@ -89,7 +86,7 @@
                 </figcaption>
               </figure>
               <figure class="demo-item">
-                <div class="demo-media">
+                <div class="demo-media" role="button" tabindex="0" aria-label="Open reading level demo">
                   <video
                     muted
                     playsinline
@@ -99,9 +96,6 @@
                   >
                     <source src="assets/demos/reading-level.mp4?v=20260508-video-refresh" type="video/mp4">
                   </video>
-                  <button class="demo-open" type="button" aria-label="Open reading level demo">
-                    <span aria-hidden="true">&#8599;</span>
-                  </button>
                 </div>
                 <figcaption>
                   <strong>Reading that can meet a kid where they are.</strong>
@@ -109,7 +103,7 @@
                 </figcaption>
               </figure>
               <figure class="demo-item">
-                <div class="demo-media">
+                <div class="demo-media" role="button" tabindex="0" aria-label="Open parent update demo">
                   <video
                     muted
                     playsinline
@@ -119,9 +113,6 @@
                   >
                     <source src="assets/demos/parent-update.mp4?v=20260508-video-refresh" type="video/mp4">
                   </video>
-                  <button class="demo-open" type="button" aria-label="Open parent update demo">
-                    <span aria-hidden="true">&#8599;</span>
-                  </button>
                 </div>
                 <figcaption>
                   <strong>A simple window into what they made.</strong>
@@ -129,9 +120,6 @@
                 </figcaption>
               </figure>
             </div>
-            <button class="demo-arrow" type="button" aria-label="Show next demo" aria-controls="demo-carousel-track">
-              <span aria-hidden="true">&rarr;</span>
-            </button>
             <div class="demo-dots" aria-label="Choose demo">
               <button class="demo-dot" type="button" aria-label="Show demo 1"></button>
               <button class="demo-dot" type="button" aria-label="Show demo 2"></button>
@@ -218,9 +206,6 @@
 
     <dialog class="demo-viewer" aria-label="Expanded demo video">
       <div class="demo-viewer-inner">
-        <button class="demo-viewer-close" type="button" aria-label="Close expanded demo">
-          <span aria-hidden="true">&times;</span>
-        </button>
         <video class="demo-viewer-video" controls muted playsinline preload="metadata"></video>
       </div>
     </dialog>
@@ -231,6 +216,6 @@
         <p>Daso &middot; 2026</p>
       </div>
     </footer>
-    <script src="script.js?v=20260508-demo-viewer"></script>
+    <script src="script.js?v=20260508-click-video"></script>
   </body>
 </html>

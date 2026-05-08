@@ -211,6 +211,8 @@ textarea:focus-visible {
 
 .demo-media {
   position: relative;
+  border-radius: 8px;
+  cursor: zoom-in;
 }
 
 .demo-item video {
@@ -223,36 +225,16 @@ textarea:focus-visible {
   box-shadow: var(--shadow);
   cursor: zoom-in;
   object-fit: cover;
+  pointer-events: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.demo-open {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: inline-flex;
-  width: 42px;
-  height: 42px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(23, 23, 23, 0.08);
-  border-radius: 50%;
-  background: rgba(255, 254, 253, 0.92);
-  box-shadow: 0 10px 24px rgba(23, 23, 23, 0.14);
-  color: var(--ink);
-  cursor: pointer;
-  font: inherit;
-  font-size: 21px;
-  font-weight: 760;
-  line-height: 1;
-  transition: transform 160ms ease, box-shadow 160ms ease;
+.demo-media:hover video {
+  border-color: rgba(231, 118, 44, 0.55);
+  box-shadow: 0 20px 54px rgba(23, 23, 23, 0.13);
 }
 
-.demo-open:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(23, 23, 23, 0.18);
-}
-
-.demo-open:focus-visible {
+.demo-media:focus-visible {
   outline: 3px solid rgba(231, 118, 44, 0.28);
   outline-offset: 3px;
 }
@@ -268,10 +250,6 @@ textarea:focus-visible {
 
 .demo-item strong {
   color: var(--ink);
-}
-
-.demo-arrow {
-  display: none;
 }
 
 .demo-dots {
@@ -308,6 +286,7 @@ textarea:focus-visible {
   border: 0;
   border-radius: 10px;
   background: transparent;
+  cursor: zoom-out;
 }
 
 .demo-viewer::backdrop {
@@ -316,6 +295,7 @@ textarea:focus-visible {
 
 .demo-viewer-inner {
   position: relative;
+  cursor: auto;
 }
 
 .demo-viewer-video {
@@ -325,32 +305,6 @@ textarea:focus-visible {
   border-radius: 8px;
   background: #111;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
-}
-
-.demo-viewer-close {
-  position: absolute;
-  top: -18px;
-  right: -18px;
-  z-index: 2;
-  display: inline-flex;
-  width: 44px;
-  height: 44px;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 50%;
-  background: #fffefd;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
-  color: var(--ink);
-  cursor: pointer;
-  font: inherit;
-  font-size: 28px;
-  line-height: 1;
-}
-
-.demo-viewer-close:focus-visible {
-  outline: 3px solid rgba(231, 118, 44, 0.36);
-  outline-offset: 3px;
 }
 
 .details-grid {
@@ -449,40 +403,6 @@ textarea:focus-visible {
     display: none;
   }
 
-  .demo-arrow {
-    position: absolute;
-    top: clamp(180px, 23vw, 260px);
-    right: clamp(12px, 3vw, 32px);
-    z-index: 2;
-    display: inline-flex;
-    width: 58px;
-    height: 58px;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    border-radius: 50%;
-    background: var(--brand);
-    box-shadow: 0 16px 36px rgba(23, 23, 23, 0.18);
-    color: #fffefd;
-    cursor: pointer;
-    font: inherit;
-    font-size: 30px;
-    font-weight: 760;
-    line-height: 1;
-    transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
-  }
-
-  .demo-arrow:hover {
-    transform: translateX(2px);
-    box-shadow: 0 18px 42px rgba(23, 23, 23, 0.22);
-    filter: saturate(1.05);
-  }
-
-  .demo-arrow:focus-visible {
-    outline: 3px solid rgba(231, 118, 44, 0.28);
-    outline-offset: 3px;
-  }
-
   .demo-item {
     flex-basis: min(84vw, 920px);
   }
@@ -505,12 +425,6 @@ textarea:focus-visible {
     font-size: 20px;
   }
 
-  .demo-open {
-    width: 38px;
-    height: 38px;
-    font-size: 19px;
-  }
-
   .demo-viewer {
     width: calc(100% - 20px);
   }
@@ -519,10 +433,6 @@ textarea:focus-visible {
     max-height: calc(100svh - 64px);
   }
 
-  .demo-viewer-close {
-    top: 10px;
-    right: 10px;
-  }
 }
 
 @media (max-width: 430px) {

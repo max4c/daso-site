@@ -2,12 +2,10 @@ const carousel = document.querySelector(".demo-carousel");
 
 if (carousel) {
   const demoSection = carousel.closest(".demos");
-  const nextButton = document.querySelector(".demo-arrow");
   const dotButtons = Array.from(document.querySelectorAll(".demo-dot"));
-  const openButtons = Array.from(carousel.querySelectorAll(".demo-open"));
+  const mediaItems = Array.from(carousel.querySelectorAll(".demo-media"));
   const viewer = document.querySelector(".demo-viewer");
   const viewerVideo = viewer?.querySelector(".demo-viewer-video");
-  const closeViewerButton = viewer?.querySelector(".demo-viewer-close");
   const videos = Array.from(carousel.querySelectorAll("video"));
   let activeIndex = 0;
   let hasAutoStarted = false;
@@ -80,11 +78,6 @@ if (carousel) {
     scrollTimer = setTimeout(syncToScrollPosition, 120);
   }, { passive: true });
 
-  nextButton?.addEventListener("click", () => {
-    hasAutoStarted = true;
-    activateVideo(getClosestIndex() + 1, true);
-  });
-
   dotButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
       hasAutoStarted = true;
@@ -125,19 +118,18 @@ if (carousel) {
     viewerVideo.play().catch(() => {});
   };
 
-  videos.forEach((video, index) => {
-    video.addEventListener("click", () => {
+  mediaItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
       openViewer(index);
     });
-  });
 
-  openButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      openViewer(index);
+    item.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openViewer(index);
+      }
     });
   });
-
-  closeViewerButton?.addEventListener("click", closeViewer);
 
   viewer?.addEventListener("click", (event) => {
     if (event.target === viewer) {
