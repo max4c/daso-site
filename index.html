@@ -9,7 +9,7 @@
       content="Daso is a new kind of computer for kids, being built with parents from the beginning."
     >
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23E7762C'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="styles.css?v=20260508-click-video">
+    <link rel="stylesheet" href="styles.css?v=20260508-subscribe">
   </head>
   <body>
     <main>
@@ -175,6 +175,53 @@
           >
             Book an online meeting &rarr;
           </a>
+          <div class="subscribe-block" id="stay-in-touch">
+            <h3>Stay in touch</h3>
+            <p>
+              Not ready to book a conversation? Leave your email and we will
+              send occasional updates as Daso takes shape.
+            </p>
+            <form
+              class="subscribe-form"
+              action="https://formsubmit.co/max@getdaso.com"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="New Daso subscriber">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://www.getdaso.com/?subscribed=1#stay-in-touch">
+
+              <label class="field-label" for="subscriber-email">Email</label>
+              <div class="subscribe-row">
+                <input
+                  id="subscriber-email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                  required
+                >
+                <button class="button" type="submit">Subscribe</button>
+              </div>
+
+              <label class="checkbox-row">
+                <input
+                  type="checkbox"
+                  name="parent_interest"
+                  value="Interested parent or caregiver"
+                >
+                <span>
+                  I am a parent or caregiver interested in learning more about
+                  Daso as a device for my family.
+                </span>
+              </label>
+
+              <p class="form-note">
+                We will only email when there is something meaningful to share.
+              </p>
+              <p class="form-status" aria-live="polite"></p>
+            </form>
+          </div>
         </div>
       </section>
 
@@ -216,6 +263,6 @@
         <p>Daso &middot; 2026</p>
       </div>
     </footer>
-    <script src="script.js?v=20260508-click-video"></script>
+    <script src="script.js?v=20260508-subscribe"></script>
   </body>
 </html>

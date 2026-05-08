@@ -1,4 +1,52 @@
 const carousel = document.querySelector(".demo-carousel");
+const subscribeForm = document.querySelector(".subscribe-form");
+
+if (subscribeForm) {
+  const submitButton = subscribeForm.querySelector("button[type='submit']");
+  const statusMessage = subscribeForm.querySelector(".form-status");
+  const initialButtonText = submitButton?.textContent || "Subscribe";
+
+  subscribeForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!submitButton || !statusMessage) {
+      subscribeForm.submit();
+      return;
+    }
+
+    const endpoint = subscribeForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+    const formData = new FormData(subscribeForm);
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+    statusMessage.textContent = "";
+    statusMessage.removeAttribute("data-state");
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Subscription failed");
+      }
+
+      subscribeForm.reset();
+      statusMessage.textContent = "Thanks. We will keep you posted.";
+      statusMessage.dataset.state = "success";
+    } catch {
+      statusMessage.textContent = "Something went wrong. Email max@getdaso.com and we will add you.";
+      statusMessage.dataset.state = "error";
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = initialButtonText;
+    }
+  });
+}
 
 if (carousel) {
   const demoSection = carousel.closest(".demos");
