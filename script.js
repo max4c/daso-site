@@ -1,9 +1,11 @@
 const carousel = document.querySelector(".demo-carousel");
 
 if (carousel) {
+  const demoSection = carousel.closest(".demos");
   const nextButton = document.querySelector(".demo-arrow");
   const videos = Array.from(carousel.querySelectorAll("video"));
   let activeIndex = 0;
+  let hasAutoStarted = false;
   let scrollTimer;
 
   const playVideo = (index) => {
@@ -17,18 +19,20 @@ if (carousel) {
     });
   };
 
-  const activateVideo = (index) => {
+  const pauseVideos = () => {
+    videos.forEach((video) => {
+      video.pause();
+    });
+  };
+
+  const activateVideo = (index, shouldPlay = hasAutoStarted) => {
     activeIndex = index % videos.length;
     const activeItem = videos[activeIndex].closest(".demo-item");
     activeItem?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-    playVideo(activeIndex);
+    if (shouldPlay) {
+      playVideo(activeIndex);
+    }
   };
-
-  videos.forEach((video, index) => {
-    video.addEventListener("ended", () => {
-      activateVideo((index + 1) % videos.length);
-    });
-  });
 
   const getClosestIndex = () => {
     const carouselLeft = carousel.getBoundingClientRect().left;
@@ -43,7 +47,9 @@ if (carousel) {
     const closestIndex = getClosestIndex();
     if (closestIndex !== activeIndex) {
       activeIndex = closestIndex;
-      playVideo(activeIndex);
+      if (hasAutoStarted) {
+        playVideo(activeIndex);
+      }
     }
   };
 
@@ -53,8 +59,32 @@ if (carousel) {
   }, { passive: true });
 
   nextButton?.addEventListener("click", () => {
-    activateVideo(getClosestIndex() + 1);
+    hasAutoStarted = true;
+    activateVideo(getClosestIndex() + 1, true);
   });
 
-  playVideo(activeIndex);
+  const startFirstDemo = () => {
+    if (hasAutoStarted) {
+      return;
+    }
+
+    hasAutoStarted = true;
+    activeIndex = 0;
+    carousel.scrollTo({ left: 0, behavior: "auto" });
+    playVideo(0);
+  };
+
+  if ("IntersectionObserver" in window && demoSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          startFirstDemo();
+        } else {
+          pauseVideos();
+        }
+      });
+    }, { threshold: 0.35 });
+
+    observer.observe(demoSection);
+  }
 }
