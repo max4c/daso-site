@@ -318,12 +318,11 @@ textarea:focus-visible {
   }
 
   .demo-carousel {
-    gap: 22px;
-    max-width: 940px;
+    gap: 24px;
   }
 
   .demo-item {
-    flex-basis: min(42vw, 440px);
+    flex-basis: min(84vw, 920px);
   }
 
   .about-layout {
