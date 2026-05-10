@@ -252,6 +252,10 @@ textarea:focus-visible {
   color: var(--ink);
 }
 
+.demo-nav {
+  display: none;
+}
+
 .demo-dots {
   display: flex;
   justify-content: center;
@@ -502,6 +506,55 @@ textarea:focus-visible {
 
   .demo-dots {
     display: none;
+  }
+
+  .demo-nav {
+    position: absolute;
+    top: clamp(180px, 24vw, 260px);
+    z-index: 3;
+    display: inline-flex;
+    width: 56px;
+    height: 56px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    border-radius: 50%;
+    background: rgba(255, 254, 253, 0.94);
+    box-shadow: 0 16px 38px rgba(23, 23, 23, 0.18);
+    color: var(--brand);
+    cursor: pointer;
+    font: inherit;
+    font-size: 28px;
+    font-weight: 760;
+    line-height: 1;
+    transform: translateY(-50%);
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  }
+
+  .demo-nav-prev {
+    left: 18px;
+  }
+
+  .demo-nav-next {
+    right: 18px;
+  }
+
+  .demo-nav:hover {
+    background: #fffefd;
+    box-shadow: 0 18px 44px rgba(23, 23, 23, 0.22);
+  }
+
+  .demo-nav-prev:hover {
+    transform: translate(-2px, -50%);
+  }
+
+  .demo-nav-next:hover {
+    transform: translate(2px, -50%);
+  }
+
+  .demo-nav:focus-visible {
+    outline: 3px solid rgba(231, 118, 44, 0.28);
+    outline-offset: 3px;
   }
 
   .demo-item {

@@ -79,6 +79,8 @@ if (carousel) {
   const demoSection = carousel.closest(".demos");
   const dotButtons = Array.from(document.querySelectorAll(".demo-dot"));
   const mediaItems = Array.from(carousel.querySelectorAll(".demo-media"));
+  const previousButton = document.querySelector(".demo-nav-prev");
+  const nextButton = document.querySelector(".demo-nav-next");
   const viewer = document.querySelector(".demo-viewer");
   const viewerVideo = viewer?.querySelector(".demo-viewer-video");
   const videos = Array.from(carousel.querySelectorAll("video"));
@@ -96,6 +98,8 @@ if (carousel) {
       }
     });
   };
+
+  const normalizeIndex = (index) => ((index % videos.length) + videos.length) % videos.length;
 
   const playVideo = (index) => {
     if (isViewerOpen) {
@@ -119,7 +123,7 @@ if (carousel) {
   };
 
   const activateVideo = (index, shouldPlay = hasAutoStarted) => {
-    activeIndex = index % videos.length;
+    activeIndex = normalizeIndex(index);
     setActiveDot(activeIndex);
     const activeItem = videos[activeIndex].closest(".demo-item");
     activeItem?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
@@ -158,6 +162,19 @@ if (carousel) {
       hasAutoStarted = true;
       activateVideo(index, true);
     });
+  });
+
+  const stepDemo = (direction) => {
+    hasAutoStarted = true;
+    activateVideo(getClosestIndex() + direction, true);
+  };
+
+  previousButton?.addEventListener("click", () => {
+    stepDemo(-1);
+  });
+
+  nextButton?.addEventListener("click", () => {
+    stepDemo(1);
   });
 
   const closeViewer = () => {
