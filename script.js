@@ -99,7 +99,17 @@ if (carousel) {
     });
   };
 
-  const normalizeIndex = (index) => ((index % videos.length) + videos.length) % videos.length;
+  const updateNavButtons = (index = activeIndex) => {
+    if (previousButton) {
+      previousButton.hidden = index <= 0;
+      previousButton.setAttribute("aria-hidden", String(index <= 0));
+    }
+
+    if (nextButton) {
+      nextButton.hidden = index >= videos.length - 1;
+      nextButton.setAttribute("aria-hidden", String(index >= videos.length - 1));
+    }
+  };
 
   const playVideo = (index) => {
     if (isViewerOpen) {
@@ -123,8 +133,10 @@ if (carousel) {
   };
 
   const activateVideo = (index, shouldPlay = hasAutoStarted) => {
-    activeIndex = normalizeIndex(index);
+    const clampedIndex = Math.max(0, Math.min(index, videos.length - 1));
+    activeIndex = clampedIndex;
     setActiveDot(activeIndex);
+    updateNavButtons(activeIndex);
     const activeItem = videos[activeIndex].closest(".demo-item");
     activeItem?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
     if (shouldPlay) {
@@ -146,6 +158,7 @@ if (carousel) {
     if (closestIndex !== activeIndex) {
       activeIndex = closestIndex;
       setActiveDot(activeIndex);
+      updateNavButtons(activeIndex);
       if (hasAutoStarted) {
         playVideo(activeIndex);
       }
@@ -165,8 +178,13 @@ if (carousel) {
   });
 
   const stepDemo = (direction) => {
+    const nextIndex = getClosestIndex() + direction;
+    if (nextIndex < 0 || nextIndex >= videos.length) {
+      return;
+    }
+
     hasAutoStarted = true;
-    activateVideo(getClosestIndex() + direction, true);
+    activateVideo(nextIndex, true);
   };
 
   previousButton?.addEventListener("click", () => {
@@ -195,6 +213,7 @@ if (carousel) {
     hasAutoStarted = true;
     activeIndex = index;
     setActiveDot(activeIndex);
+    updateNavButtons(activeIndex);
     pauseVideos();
     isViewerOpen = true;
 
@@ -247,6 +266,7 @@ if (carousel) {
     hasAutoStarted = true;
     activeIndex = 0;
     setActiveDot(activeIndex);
+    updateNavButtons(activeIndex);
     carousel.scrollTo({ left: 0, behavior: "auto" });
     playVideo(0);
   };
@@ -266,4 +286,5 @@ if (carousel) {
   }
 
   setActiveDot(activeIndex);
+  updateNavButtons(activeIndex);
 }

@@ -256,6 +256,10 @@ textarea:focus-visible {
   display: none;
 }
 
+.demo-nav[hidden] {
+  display: none;
+}
+
 .demo-dots {
   display: flex;
   justify-content: center;
@@ -529,6 +533,10 @@ textarea:focus-visible {
     line-height: 1;
     transform: translateY(-50%);
     transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  }
+
+  .demo-nav[hidden] {
+    display: none;
   }
 
   .demo-nav-prev {
